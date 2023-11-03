@@ -14,3 +14,8 @@ export const fadeRightAnimationProps: MotionProps = {
   },
   variants: fadeRightVariant,
 };
+
+export const scaleToNormalVariant: Variants = {
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
+  hidden: { scale: 3, opacity: 0, transition: { duration: 0.5 } },
+};

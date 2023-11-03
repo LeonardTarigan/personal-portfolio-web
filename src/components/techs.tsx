@@ -1,3 +1,4 @@
+import { fadeRightVariant, scaleToNormalVariant } from "@/utils/animation";
 import { techs } from "@/utils/data/techs-data";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
@@ -22,21 +23,34 @@ function Techs() {
         style={{ x: xFlowLeft }}
         className="absolute left-0 z-10 h-full w-1/2 bg-zinc-800"
       ></motion.div>
-      <div className=" grid w-full grid-cols-3 rounded-xl px-5 md:h-52 md:w-2/3 md:grid-cols-6">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          margin: "0px 0px -30% 0px",
+          once: true,
+        }}
+        transition={{
+          duration: 0.5,
+          staggerChildren: 0.1,
+          type: "tween",
+        }}
+        className=" grid w-full grid-cols-3 rounded-xl px-5 md:h-52 md:w-2/3 md:grid-cols-6"
+      >
         {techs.map(({ logo, name }, index) => {
           return (
             <div
               key={index}
               className="group relative flex w-full items-center justify-center overflow-hidden border border-zinc-700 p-5 transition-all duration-150 hover:bg-white"
             >
-              {logo}
+              <motion.div variants={scaleToNormalVariant}>{logo}</motion.div>
               <span className="absolute -bottom-[100%] w-full bg-zinc-800 px-2 py-1 text-center text-xs transition-all duration-150 group-hover:bottom-0">
                 {name}
               </span>
             </div>
           );
         })}
-      </div>
+      </motion.div>
       <motion.div
         style={{ x: xFlowRight }}
         className="absolute right-0 z-10 h-full w-1/2 bg-zinc-800"

@@ -8,6 +8,8 @@ import PSRectangle from "./icons/ps-rectangle";
 import PSTriangle from "./icons/ps-triangle";
 import PSX from "./icons/ps-x";
 import Logo from "./logo";
+import { motion } from "framer-motion";
+import { fadeRightVariant } from "@/utils/animation";
 
 const glitchFont = Orbitron({
   weight: ["400", "700"],
@@ -18,27 +20,44 @@ function Hero() {
   const text = useGlitchText("LEONARD_TARIGAN");
 
   return (
-    <section className="flex h-screen w-full flex-col justify-between gap-10 p-5 pb-10 md:max-h-[45rem] md:p-10">
-      <div
-        id="glitch-text"
-        className="group flex cursor-default flex-col items-center justify-between gap-5 border border-zinc-400 px-7 py-7 font-bold transition-all duration-150 hover:bg-white hover:text-black sm:flex-row"
-      >
-        <h1
-          className={`${glitchFont.className} select-none text-2xl sm:text-3xl md:text-4xl lg:text-7xl`}
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{
+        once: true,
+      }}
+      transition={{
+        duration: 0.5,
+        staggerChildren: 0.1,
+        type: "tween",
+      }}
+      className="flex h-screen w-full flex-col justify-between gap-10 p-5 pb-10 md:max-h-[45rem] md:p-10"
+    >
+      <motion.div variants={fadeRightVariant}>
+        <div
+          id="glitch-text"
+          className="group flex cursor-default flex-col items-center justify-between gap-5 border border-zinc-400 px-7 py-7 font-bold transition-all duration-150 hover:bg-white hover:text-black sm:flex-row"
         >
-          {text}
-        </h1>
-        <Logo className="h-14 w-14 fill-white group-hover:fill-black" />
-      </div>
+          <h1
+            className={`${glitchFont.className} select-none text-2xl sm:text-3xl md:text-4xl lg:text-7xl`}
+          >
+            {text}
+          </h1>
+          <Logo className="h-14 w-14 fill-white group-hover:fill-black" />
+        </div>
+      </motion.div>
       <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:items-end">
-        <p className="w-3/4 text-center sm:w-2/3 md:text-justify lg:w-2/5">
+        <motion.p
+          variants={fadeRightVariant}
+          className="w-3/4 text-center sm:w-2/3 md:text-justify lg:w-2/5"
+        >
           Passionate frontend developer with a love for exploring cutting-edge
           technologies. Crafting seamless digital experiences is my forte.
           Let&apos;s bring your ideas to life with innovation and precision in
           every line of code.
-        </p>
+        </motion.p>
         <ul className="flex w-full select-none flex-col items-center gap-3 text-end font-semibold uppercase text-zinc-500 md:items-end">
-          <li>
+          <motion.li variants={fadeRightVariant}>
             <Scroll
               to="profile"
               spy={true}
@@ -54,8 +73,8 @@ function Hero() {
                 <PSTriangle className="h-7 w-7 stroke-white group-hover:stroke-emerald-500" />
               </span>
             </Scroll>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={fadeRightVariant}>
             <Scroll
               to="experiences"
               spy={true}
@@ -71,8 +90,8 @@ function Hero() {
                 <PSCircle className="h-7 w-7 stroke-white group-hover:stroke-rose-500" />
               </span>
             </Scroll>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={fadeRightVariant}>
             <Scroll
               to="projects"
               spy={true}
@@ -88,8 +107,8 @@ function Hero() {
                 <PSX className="h-7 w-7 stroke-white group-hover:stroke-sky-500" />
               </span>
             </Scroll>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={fadeRightVariant}>
             <Scroll
               to="collab"
               spy={true}
@@ -105,10 +124,10 @@ function Hero() {
                 <PSRectangle className="h-7 w-7 stroke-white group-hover:stroke-pink-500" />
               </span>
             </Scroll>
-          </li>
+          </motion.li>
         </ul>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
