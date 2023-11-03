@@ -1,14 +1,14 @@
 "use client";
 
+import { fadeRightVariant } from "@/utils/animation";
+import { projects } from "@/utils/data/project-data";
+import { marqueeFont } from "@/utils/font";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 import Marquee from "react-fast-marquee";
-import { fadeRightVariant } from "../../utils/animation";
-import { projects } from "../../utils/data/project-data";
 import { CodeIcon } from "./icons/code-icon";
 import { LinkIcon } from "./icons/link-icon";
-import { marqueeFont } from "../../utils/font";
-import Image from "next/image";
 
 function Projects() {
   const [maxItem, setMaxItem] = useState(3);

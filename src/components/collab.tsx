@@ -1,7 +1,7 @@
+import { fadeRightVariant } from "@/utils/animation";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { FormEvent, useRef } from "react";
-import { fadeRightVariant } from "../../utils/animation";
 import toast from "react-hot-toast";
 
 function Collab() {

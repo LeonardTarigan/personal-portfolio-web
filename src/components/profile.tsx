@@ -1,9 +1,9 @@
 "use client";
 
+import { fadeRightVariant } from "@/utils/animation";
+import { socialMedias } from "@/utils/data/social-media-data";
 import { AnimatePresence, motion } from "framer-motion";
-import { fadeRightVariant } from "../../utils/animation";
 import Image from "next/image";
-import { socialMedias } from "../../utils/data/social-media-data";
 import { useEffect, useState } from "react";
 
 function Profile() {

@@ -1,9 +1,9 @@
+import { fadeRightVariant } from "@/utils/animation";
+import { experiences } from "@/utils/data/experience-data";
+import { marqueeFont } from "@/utils/font";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
-import { fadeRightVariant } from "../../utils/animation";
-import { experiences } from "../../utils/data/experience-data";
-import { marqueeFont } from "../../utils/font";
 
 function Experiences() {
   return (

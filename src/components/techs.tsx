@@ -1,6 +1,6 @@
+import { techs } from "@/utils/data/techs-data";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { techs } from "../../utils/data/techs-data";
 
 function Techs() {
   const extendedRef = useRef<HTMLDivElement | null>(null);
