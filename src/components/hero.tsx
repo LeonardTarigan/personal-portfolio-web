@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client";
 
+import { useGlitchText } from "@/hooks/useGlitchText";
 import { Orbitron } from "next/font/google";
-import { useEffect, useState } from "react";
+import { Link as Scroll } from "react-scroll";
 import PSCircle from "./icons/ps-circle";
 import PSRectangle from "./icons/ps-rectangle";
 import PSTriangle from "./icons/ps-triangle";
 import PSX from "./icons/ps-x";
 import Logo from "./logo";
-import { Link as Scroll } from "react-scroll";
 
 const glitchFont = Orbitron({
   weight: ["400", "700"],
@@ -16,54 +15,7 @@ const glitchFont = Orbitron({
 });
 
 function Hero() {
-  const initialText = "LEONARD_TARIGAN";
-
-  const [text, setText] = useState<string>(initialText);
-
-  const letters: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let interval: NodeJS.Timeout | null = null;
-
-  const startGlitchEffect = () => {
-    let iteration = 0;
-
-    clearInterval(interval as NodeJS.Timeout);
-
-    interval = setInterval(() => {
-      setText((prevText) =>
-        prevText
-          .split("")
-          .map((letter, index) => {
-            if (index < iteration) {
-              return initialText[index];
-            }
-
-            return letters[Math.floor(Math.random() * 26)];
-          })
-          .join(""),
-      );
-
-      if (iteration >= initialText.length) {
-        clearInterval(interval as NodeJS.Timeout);
-      }
-
-      iteration += 1 / 3;
-    }, 30);
-  };
-
-  useEffect(() => {
-    const element = document.getElementById("glitch-text");
-
-    if (element) {
-      element.addEventListener("mouseover", startGlitchEffect);
-    }
-
-    return () => {
-      if (element) {
-        element.removeEventListener("mouseover", startGlitchEffect);
-      }
-      clearInterval(interval as NodeJS.Timeout);
-    };
-  }, []);
+  const text = useGlitchText("LEONARD_TARIGAN");
 
   return (
     <section className="flex h-screen w-full flex-col justify-between gap-10 p-5 pb-10 md:max-h-[45rem] md:p-10">
