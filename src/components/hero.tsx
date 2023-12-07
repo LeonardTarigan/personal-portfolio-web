@@ -51,7 +51,7 @@ function Hero() {
           variants={fadeRightVariant}
           className="w-3/4 text-center sm:w-2/3 md:text-justify lg:w-2/5"
         >
-          Passionate frontend developer with a love for exploring cutting-edge
+          Passionate front-end developer with a love for exploring cutting-edge
           technologies. Crafting seamless digital experiences is my forte.
           Let&apos;s bring your ideas to life with innovation and precision in
           every line of code.

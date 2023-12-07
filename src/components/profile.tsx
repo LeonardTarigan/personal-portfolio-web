@@ -88,7 +88,7 @@ function Profile() {
             variants={fadeRightVariant}
             className="font-semibold text-zinc-500"
           >
-            Frontend Developer | Web & Cloud Mentor at GDSC University of
+            Front-End Developer | Web & Cloud Mentor at GDSC University of
             Brawijaya | Informatics Student
           </motion.p>
         </div>

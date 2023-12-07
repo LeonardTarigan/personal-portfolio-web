@@ -56,7 +56,7 @@ function Experiences() {
               return (
                 <div key={index} className="flex gap-2">
                   <div className="h-14 w-14 shrink-0 animate-pulse overflow-hidden rounded-lg bg-zinc-900"></div>
-                  <div className="aspect-video animate-pulse rounded-xl bg-zinc-900 p-5 md:w-1/2"></div>
+                  <div className="aspect-[16/5] w-full  animate-pulse rounded-xl bg-zinc-900 p-5 md:w-1/2"></div>
                 </div>
               );
             })}
