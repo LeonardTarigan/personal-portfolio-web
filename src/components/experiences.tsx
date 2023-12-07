@@ -1,11 +1,37 @@
+import { db } from "@/firebase";
 import { fadeRightVariant } from "@/utils/animation";
-import { experiences } from "@/utils/data/experience-data";
 import { marqueeFont } from "@/utils/font";
+import { convertTimestampToMonthYear } from "@/utils/global-functions";
+import { ExperienceData } from "@/utils/types";
+import { FirebaseError } from "firebase/app";
+import { doc, getDoc } from "firebase/firestore";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
+import toast from "react-hot-toast";
 
 function Experiences() {
+  const [exp, setExp] = useState<ExperienceData[]>();
+
+  async function getAllExperience(): Promise<void> {
+    try {
+      const docRef = doc(db, "content-data", "experience");
+      const docSnap = await getDoc(docRef);
+      const data = docSnap.data()?.data;
+
+      if (docSnap.exists()) {
+        setExp(data);
+      }
+    } catch (err) {
+      if (err instanceof FirebaseError) toast.error(err.message);
+    }
+  }
+
+  useEffect(() => {
+    getAllExperience();
+  }, []);
+
   return (
     <section id="experiences" className="relative flex flex-col gap-10">
       <Marquee
@@ -21,19 +47,37 @@ function Experiences() {
       </Marquee>
 
       <div className="flex flex-col gap-5 px-5 md:px-10">
-        {experiences.map(
+        {!exp && (
+          <>
+            {[...Array(3)].map((_, index) => {
+              return (
+                <div key={index} className="flex gap-2">
+                  <div className="h-14 w-14 shrink-0 animate-pulse overflow-hidden rounded-lg bg-zinc-900"></div>
+                  <div className="aspect-video animate-pulse rounded-xl bg-zinc-900 p-5 md:w-1/2"></div>
+                </div>
+              );
+            })}
+          </>
+        )}
+        {exp?.map(
           (
             {
               company,
               descriptions,
-              imageUrl,
+              imageURL,
+              startTime,
+              endTime,
               location,
-              timeline,
               title,
-              type,
             },
             index,
           ) => {
+            const timeline = `${convertTimestampToMonthYear(
+              startTime.seconds,
+            )} - ${
+              endTime ? convertTimestampToMonthYear(endTime.seconds) : "Present"
+            }`;
+
             return (
               <motion.div
                 initial="hidden"
@@ -54,7 +98,7 @@ function Experiences() {
                   variants={fadeRightVariant}
                   className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-zinc-900"
                 >
-                  <Image src={imageUrl} alt={company} fill />
+                  <Image src={imageURL} alt={company} fill />
                 </motion.div>
                 <motion.div
                   variants={fadeRightVariant}
@@ -63,7 +107,7 @@ function Experiences() {
                   <h2 className="text-xl font-bold">{title}</h2>
                   <p className="font-semibold">{company}</p>
                   <p className="font-semibold text-zinc-500">
-                    {timeline} • {location} • {type}
+                    {timeline} • {location}
                   </p>
                   <ul className="ml-4 mt-3 list-disc text-sm">
                     {descriptions.map((desc, index) => {
