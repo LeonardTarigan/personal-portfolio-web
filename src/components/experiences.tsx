@@ -1,7 +1,10 @@
 import { db } from "@/firebase";
 import { fadeRightVariant } from "@/utils/animation";
 import { marqueeFont } from "@/utils/font";
-import { convertTimestampToMonthYear } from "@/utils/global-functions";
+import {
+  convertTimestampToMonthYear,
+  sortExperienceByTime,
+} from "@/utils/global-functions";
 import { ExperienceData } from "@/utils/types";
 import { FirebaseError } from "firebase/app";
 import { doc, getDoc } from "firebase/firestore";
@@ -59,66 +62,69 @@ function Experiences() {
             })}
           </>
         )}
-        {exp?.map(
-          (
-            {
-              company,
-              descriptions,
-              imageURL,
-              startTime,
-              endTime,
-              location,
-              title,
-            },
-            index,
-          ) => {
-            const timeline = `${convertTimestampToMonthYear(
-              startTime.seconds,
-            )} - ${
-              endTime ? convertTimestampToMonthYear(endTime.seconds) : "Present"
-            }`;
+        {exp &&
+          sortExperienceByTime(exp)?.map(
+            (
+              {
+                company,
+                descriptions,
+                imageURL,
+                startTime,
+                endTime,
+                location,
+                title,
+              },
+              index,
+            ) => {
+              const timeline = `${convertTimestampToMonthYear(
+                startTime.seconds,
+              )} - ${
+                endTime
+                  ? convertTimestampToMonthYear(endTime.seconds)
+                  : "Present"
+              }`;
 
-            return (
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{
-                  margin: "0px 0px -30% 0px",
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.5,
-                  staggerChildren: 0.2,
-                  type: "tween",
-                }}
-                key={index}
-                className="flex gap-2"
-              >
+              return (
                 <motion.div
-                  variants={fadeRightVariant}
-                  className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-zinc-900"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{
+                    margin: "0px 0px -30% 0px",
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    staggerChildren: 0.2,
+                    type: "tween",
+                  }}
+                  key={index}
+                  className="flex gap-2"
                 >
-                  <Image src={imageURL} alt={company} fill />
+                  <motion.div
+                    variants={fadeRightVariant}
+                    className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-zinc-900"
+                  >
+                    <Image src={imageURL} alt={company} fill />
+                  </motion.div>
+                  <motion.div
+                    variants={fadeRightVariant}
+                    className="rounded-xl bg-zinc-900 p-5 md:w-1/2"
+                  >
+                    <h2 className="text-xl font-bold">{title}</h2>
+                    <p className="font-semibold">{company}</p>
+                    <p className="font-semibold text-zinc-500">
+                      {timeline} • {location}
+                    </p>
+                    <ul className="ml-4 mt-3 list-disc text-sm">
+                      {descriptions.map((desc, index) => {
+                        return <li key={index}>{desc}</li>;
+                      })}
+                    </ul>
+                  </motion.div>
                 </motion.div>
-                <motion.div
-                  variants={fadeRightVariant}
-                  className="rounded-xl bg-zinc-900 p-5 md:w-1/2"
-                >
-                  <h2 className="text-xl font-bold">{title}</h2>
-                  <p className="font-semibold">{company}</p>
-                  <p className="font-semibold text-zinc-500">
-                    {timeline} • {location}
-                  </p>
-                  <ul className="ml-4 mt-3 list-disc text-sm">
-                    {descriptions.map((desc, index) => {
-                      return <li key={index}>{desc}</li>;
-                    })}
-                  </ul>
-                </motion.div>
-              </motion.div>
-            );
-          },
-        )}
+              );
+            },
+          )}
       </div>
     </section>
   );

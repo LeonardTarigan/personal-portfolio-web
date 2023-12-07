@@ -1,3 +1,5 @@
+import { ExperienceData } from "./types";
+
 export function transformStringToDate(dateString: string): Date | null {
   const monthsMap: { [key: string]: number } = {
     Jan: 0,
@@ -49,4 +51,27 @@ export function convertTimestampToMonthYear(timestampSeconds: number): string {
   const year = date.getUTCFullYear();
 
   return `${month} ${year}`;
+}
+
+export function sortExperienceByTime(
+  experienceArray: ExperienceData[],
+): ExperienceData[] {
+  return experienceArray.sort((a, b) => {
+    const aStart = a.startTime.seconds * 1000;
+    const bStart = b.startTime.seconds * 1000;
+
+    const aEnd = a.endTime
+      ? a.endTime.seconds * 1000
+      : Number.POSITIVE_INFINITY; // Use positive infinity for ongoing items
+
+    const bEnd = b.endTime
+      ? b.endTime.seconds * 1000
+      : Number.POSITIVE_INFINITY;
+
+    if (aStart === bStart) {
+      return bEnd - aEnd; // Sort by endTime in descending order if start dates are the same
+    }
+
+    return bStart - aStart; // Sort by startTime in descending order
+  });
 }
