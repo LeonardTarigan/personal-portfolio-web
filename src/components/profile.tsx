@@ -114,25 +114,22 @@ function Profile() {
           variants={fadeRightVariant}
           className="text-justify text-sm md:text-base"
         >
-          In my third year at the University of Brawijaya, I&apos;m immersing
-          myself in the dynamic world of informatics. As a passionate Frontend
-          Developer, I specialize in Next.js, TypeScript, and Tailwind,
-          sculpting user interfaces that seamlessly blend innovation with
-          usability. Beyond coding, my curiosity extends to mobile development
-          and machine learning, where I find joy in unraveling the possibilities
-          of tomorrow&apos;s tech landscape.
+          In my third year as an informatics student, I&apos;ve developed a
+          strong interest in software engineering. My focus has been on creating
+          user-friendly web front-ends, gaining valuable hands-on experience
+          along the way. I genuinely enjoy exploring new challenges, always
+          eager to learn and stay updated on the latest industry trends.
         </motion.p>
         <motion.p
           variants={fadeRightVariant}
           className="text-justify text-sm md:text-base"
         >
-          When not crafting digital experiences, I switch gears to my other
-          passions. With a guitar in hand, I find solace in creating melodies,
-          particularly drawn to the intricate rhythms of prog metal. Music fuels
-          my creativity, offering a harmonious balance to the analytical world
-          of coding. Together, these facets define a journey where technology
-          meets artistry, and each chord strummed resonates with the same
-          passion that fuels my coding endeavors.
+          Looking ahead, I&apos;m keen on exploring mobile development and cloud
+          computing, areas that pique my curiosity. Beyond coding, you&apos;ll
+          find me strumming my guitar or immersing myself in video games, all
+          while enjoying the rhythmic vibes of rock and progressive metal music.
+          These diverse interests reflect both my technical skills and the
+          things that bring me joy beyond the digital landscape.
         </motion.p>
       </motion.div>
     </section>
